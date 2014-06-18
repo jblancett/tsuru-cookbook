@@ -1,17 +1,11 @@
-tsuru Cookbook
+Tsuru Cookbook
 ==============
-TODO: Enter the cookbook description here.
-
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+Installs tsuru-server package from official tsuru ppa
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
-
-e.g.
-#### packages
-- `toaster` - tsuru needs toaster to brown your bagel.
+### Platform
+* Ubuntu
 
 Attributes
 ----------
@@ -27,19 +21,34 @@ e.g.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['tsuru']['bacon']</tt></td>
+    <td><tt>['tsuru']['package']['api_enabled']</tt></td>
     <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td>whether to enable tsuru api</td>
+    <td><tt>false</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['tsuru']['package']['api_admin_enabled']</tt></td>
+    <td>Boolean</td>
+    <td>whether to enable tsuru admin</td>
+    <td><tt>false</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['tsuru']['package']['collector_enabled']</tt></td>
+    <td>Boolean</td>
+    <td>whether to enable tsuru collector</td>
+    <td><tt>false</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['tsuru']['package']['agent_enabled']</tt></td>
+    <td>Boolean</td>
+    <td>whether to enable tsuru ssh agent</td>
+    <td><tt>false</tt></td>
   </tr>
 </table>
 
 Usage
 -----
 #### tsuru::default
-TODO: Write usage instructions for each cookbook.
-
-e.g.
 Just include `tsuru` in your node's `run_list`:
 
 ```json
@@ -53,16 +62,11 @@ Just include `tsuru` in your node's `run_list`:
 
 Contributing
 ------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
-
-e.g.
 1. Fork the repository on Github
 2. Create a named feature branch (like `add_component_x`)
 3. Write your change
-4. Write tests for your change (if applicable)
-5. Run the tests, ensuring they all pass
-6. Submit a Pull Request using Github
+4. Submit a Pull Request using Github
 
-License and Authors
+Authors
 -------------------
-Authors: TODO: List authors
+Authors: jblancett (josh@firma8.com)
