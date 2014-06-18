@@ -9,9 +9,6 @@ Requirements
 
 Attributes
 ----------
-TODO: List your cookbook attributes here.
-
-e.g.
 #### tsuru::default
 <table>
   <tr>
@@ -49,11 +46,16 @@ e.g.
 Usage
 -----
 #### tsuru::default
-Just include `tsuru` in your node's `run_list`:
+Just include `tsuru` in your node's run list and set attributes for the services you want enabled:
 
 ```json
 {
   "name":"my_node",
+  "default": {
+    "tsuru": {
+      "agent_enabled": true
+    }
+  },
   "run_list": [
     "recipe[tsuru]"
   ]
