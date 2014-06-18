@@ -20,36 +20,9 @@ if node['platform'] == 'ubuntu'
     variables :tsuru => node['tsuru']
   end
 
-  if node['tsuru']['agent']['private_key']
-    file node['tsuru']['agent']['private_key_path'] do
-      action :create
-      owner 'tsuru'
-      mode 0600
-      content node['tsuru']['agent']['private_key']
-    end
-  else
-    cookbook_file node['tsuru']['agent']['private_key_path'] do
-      action :create
-      owner 'tsuru'
-      mode 0600
-      source 'id_rsa'
-    end
-  end
-
-  if node['tsuru']['agent']['public_key']
-    file node['tsuru']['agent']['public_key_path'] do
-      action :create
-      owner 'tsuru'
-      mode 0644
-      content node['tsuru']['agent']['public_key']
-    end
-  else
-    cookbook_file node['tsuru']['agent']['public_key_path'] do
-      action :create
-      owner 'tsuru'
-      mode 0600
-      source 'id_rsa.pub'
-    end
+  execute 'generate tsuru ssh agent rsa key' do
+    command "ssh-keygen -f #{node['tsuru']['agent']['private_key']} -N ''"
+    creates node['tsuru']['agent']['private_key']
   end
 
 end
