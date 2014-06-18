@@ -25,4 +25,18 @@ if node['platform'] == 'ubuntu'
     creates node['tsuru']['agent']['private_key']
   end
 
+  {
+    'api_enabled' => 'tsuru-server-api',
+    'api_admin_enabled' => 'tsuru-server-admin',
+    'collector_enabled' => 'tsuru-server-collector',
+    'agent_enabled' => 'tsuru-ssh-agent'
+  }.each do |attribute, svc|
+    service svc do
+      action :start
+      supports :restart => true, :status => true
+      provider Chef::Provider::Service::Upstart
+      only_if { node['tsuru'][attribute] }
+    end
+  end
+
 end
