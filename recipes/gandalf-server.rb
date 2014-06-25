@@ -34,10 +34,12 @@ if node['platform'] == 'ubuntu'
 
   service 'gandalf-server' do
     action [:enable, :start]
+    provider Chef::Provider::Service::Upstart if Chef::VersionConstraint.new('>= 13.10').include?(node['platform_version'])
   end
 
   service 'git-daemon' do
     action [:enable, :start]
+    provider Chef::Provider::Service::Upstart if Chef::VersionConstraint.new('>= 13.10').include?(node['platform_version'])
   end
 
 end
