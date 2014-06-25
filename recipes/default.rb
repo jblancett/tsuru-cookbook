@@ -2,7 +2,9 @@ if node['platform'] == 'ubuntu'
 
   include_recipe 'tsuru::repo'
 
-  package 'tsuru-server'
+  package 'tsuru-server' do
+    action :upgrade
+  end
 
   template '/etc/default/tsuru-server' do
     action :create
