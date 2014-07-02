@@ -2,8 +2,11 @@ if node['platform'] == 'ubuntu'
 
   include_recipe 'tsuru::repo'
 
-  package 'gandalf-server' do
-    action :upgrade
+  ['gandalf-server','archive-server'].each do |pkg|
+    package pkg do
+      action :upgrade
+      options '-o Dpkg::Options::="--force-confold"'
+    end
   end
 
   directory '/home/git/bare-template/hooks' do
@@ -14,12 +17,12 @@ if node['platform'] == 'ubuntu'
     recursive true
   end
 
-  cookbook_file '/home/git/bare-template/hooks/post-receive' do
+  cookbook_file '/home/git/bare-template/hooks/pre-receive' do
     action :create
     owner 'git'
     group 'git'
     mode 0755
-    source 'post-receive'
+    source 'pre-receive'
   end
 
   template '/etc/gandalf.conf' do
@@ -32,14 +35,11 @@ if node['platform'] == 'ubuntu'
     notifies :restart, 'service[gandalf-server]'
   end
 
-  service 'gandalf-server' do
-    action [:enable, :start]
-    provider Chef::Provider::Service::Upstart if Chef::VersionConstraint.new('>= 13.10').include?(node['platform_version'])
-  end
-
-  service 'git-daemon' do
-    action [:enable, :start]
-    provider Chef::Provider::Service::Upstart if Chef::VersionConstraint.new('>= 13.10').include?(node['platform_version'])
+  ['gandalf-server','git-daemon','archive-server'].each do |svc|
+    service svc do
+      action [:enable, :start]
+      provider Chef::Provider::Service::Upstart if Chef::VersionConstraint.new('>= 13.10').include?(node['platform_version'])
+    end
   end
 
 end
