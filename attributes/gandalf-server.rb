@@ -5,3 +5,4 @@ default['gandalf-server']['git']['bare']['template'] = '/home/git/bare-template'
 default['gandalf-server']['authorized-keys-path'] = '/home/git/.ssh/authorized_keys'
 default['gandalf-server']['host'] = 'localhost'
 default['gandalf-server']['bind'] = 'localhost:8000'
+default['gandalf-server']['token'] = nil

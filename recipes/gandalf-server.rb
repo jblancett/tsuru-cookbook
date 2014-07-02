@@ -35,6 +35,15 @@ if node['platform'] == 'ubuntu'
     notifies :restart, 'service[gandalf-server]'
   end
 
+  template '/home/git/.bash_profile' do
+    action :create_if_missing
+    owner 'root'
+    group 'root'
+    mode 0644
+    source 'bash_profile.erb'
+    variables tsuru_token: node['gandalf-server']['token'] || `tsr token`
+  end
+
   ['gandalf-server','git-daemon','archive-server'].each do |svc|
     service svc do
       action [:enable, :start]
