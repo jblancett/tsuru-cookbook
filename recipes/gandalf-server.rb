@@ -2,7 +2,7 @@ if node['platform'] == 'ubuntu'
 
   include_recipe 'tsuru::repo'
 
-  ['gandalf-server','archive-server'].each do |pkg|
+  ['tsuru-server', 'gandalf-server','archive-server'].each do |pkg|
     package pkg do
       action :upgrade
       options '-o Dpkg::Options::="--force-confold"'
