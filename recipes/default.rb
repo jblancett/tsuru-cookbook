@@ -22,8 +22,6 @@ if node['platform'] == 'ubuntu'
 
   {
     'api_enabled' => 'tsuru-server-api',
-    'api_admin_enabled' => 'tsuru-server-admin',
-    'collector_enabled' => 'tsuru-server-collector',
     'agent_enabled' => 'tsuru-ssh-agent'
   }.each do |attribute, svc|
     service svc do

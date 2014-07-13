@@ -4,7 +4,6 @@ default['tsuru']['package']['repo_key'] = '383F073D'
 
 default['tsuru']['api_enabled'] = false
 default['tsuru']['api_admin_enabled'] = false
-default['tsuru']['collector_enabled'] = false
 default['tsuru']['agent_enabled'] = false
 
 default['tsuru']['agent']['user'] = 'ubuntu'
