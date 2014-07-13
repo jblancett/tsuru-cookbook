@@ -1,11 +1,20 @@
 
-include_recipe('tsuru::docker-registry')
-include_recipe('tsuru::gandalf-server')
+include_recipe('tsuru::agent')
 
-node.override['tsuru']['api_enabled'] = true
-node.override['tsuru']['api_admin_enabled'] = true
-node.override['tsuru']['collector_enabled'] = true
-node.override['tsuru']['agent_enabled'] = true
+service 'tsuru-server-api' do
+  action :nothing
+  supports :restart => true, :status => true
+  provider Chef::Provider::Service::Upstart
+end
 
-include_recipe('tsuru')
+execute "sed -i 's/^TSR_API_ENABLED=.*/TSR_API_ENABLED=yes/' /etc/default/tsuru-server" do
+  action :run
+  notifies :start, 'service[tsuru-server-api]'
+  not_if 'cat /etc/default/tsuru-server | grep TSR_API_ENABLED=yes'
+end
 
+execute "sed -i 's/^TSR_API_ADMIN_ENABLED=.*/TSR_API_ADMIN_ENABLED=yes/' /etc/default/tsuru-server" do
+  action :run
+  notifies :start, 'service[tsuru-server-api]'
+  not_if 'cat /etc/default/tsuru-server | grep TSR_API_ADMIN_ENABLED=yes'
+end
