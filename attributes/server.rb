@@ -56,7 +56,7 @@ default['tsuru']['server']['docker']['ssh']['public-key'] = '/home/ubuntu/.ssh/i
 default['tsuru']['server']['docker']['ssh']['user'] = 'ubuntu'
 default['tsuru']['server']['docker']['ssh']['sshd-path'] = '/usr/sbin/sshd'
 default['tsuru']['server']['docker']['registry'] = node.name
-default['tsuru']['server']['docker']['servers'] = [node['docker']['host'].find{|host| host.start_with?('tcp') }[/\d+$/]] || 'http://localhost:2375'
+default['tsuru']['server']['docker']['servers'] = [node['docker']['host'].find{|host| host.start_with?('tcp') }.gsub('tcp://','http://')] rescue ['http://localhost:2375']
 
 default['tsuru']['server']['hipache']['domain'] = node.name
 
