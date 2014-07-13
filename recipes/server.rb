@@ -18,3 +18,13 @@ execute "sed -i 's/^TSR_API_ADMIN_ENABLED=.*/TSR_API_ADMIN_ENABLED=yes/' /etc/de
   notifies :start, 'service[tsuru-server-api]'
   not_if 'cat /etc/default/tsuru-server | grep TSR_API_ADMIN_ENABLED=yes'
 end
+
+template '/etc/tsuru/tsuru.conf' do
+  action :create
+  source 'tsuru.conf.erb'
+  owner 'root'
+  group 'root'
+  mode 0644
+  variables tsuru_server: node['tsuru']['server']
+  notifies :restart, 'service[tsuru-server-api]'
+end
