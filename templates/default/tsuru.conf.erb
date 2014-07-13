@@ -77,7 +77,7 @@ docker:
     - <%=server%>
 <% end %>
 <% end %>
-<% if @tsuru_server['router'] == 'hipache' %>
+<% if @tsuru_server['docker']['router'] == 'hipache' %>
 hipache:
   domain: <%=@tsuru_server['hipache']['domain']%>
 <% end %>
