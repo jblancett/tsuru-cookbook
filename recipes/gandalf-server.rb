@@ -4,9 +4,9 @@ if node['platform'] == 'ubuntu'
 
   ['tsuru-server', 'gandalf-server','archive-server'].each do |pkg|
     package pkg do
-      action :upgrade
+      action :nothing
       options '-o Dpkg::Options::="--force-confold"'
-    end
+    end.run_action(:upgrade)
   end
 
   directory '/home/git/bare-template/hooks' do

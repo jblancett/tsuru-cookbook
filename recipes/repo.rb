@@ -1,4 +1,5 @@
 apt_repository 'tsuru' do
+  action :nothing
   uri node['tsuru']['package']['repo_url']
   distribution node['lsb']['codename']
   components ['main']
@@ -6,4 +7,4 @@ apt_repository 'tsuru' do
   key node['tsuru']['package']['repo_key']
   deb_src true
   only_if { node['platform'] == 'ubuntu' }
-end
+end.run_action(:add)
