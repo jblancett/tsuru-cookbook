@@ -1,7 +1,5 @@
 default['tsuru']['server']['listen_addr'] = '0.0.0.0'
 default['tsuru']['server']['listen_port'] = '8080'
-default['tsuru']['server']['admin_listen_addr'] = '0.0.0.0'
-default['tsuru']['server']['admin_listen_port'] = '8081'
 default['tsuru']['server']['use-tls'] = false
 default['tsuru']['server']['tls-cert-file'] = nil # path to cert
 default['tsuru']['server']['tls-key-file'] = nil # path to key

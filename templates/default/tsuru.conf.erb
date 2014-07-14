@@ -1,5 +1,4 @@
 listen: "<%=@tsuru_server['listen_addr']%>:<%=@tsuru_server['listen_port']%>"
-admin-listen: "<%=@tsuru_server['admin_listen_addr']%>:<%=@tsuru_server['admin_listen_port']%>"
 host: <%=@tsuru_server['host']%>
 debug: <%=@tsuru_server['debug']%>
 
@@ -9,7 +8,6 @@ tls-cert-file: <%=@tsuru_server['tls-cert-file']%>
 tls-key-file: <%=@tsuru_server['tls-key-file']%>
 
 <% end %>
-
 database:
   url: <%=@tsuru_server['database']['url']%>
   name: <%=@tsuru_server['database']['name']%>
