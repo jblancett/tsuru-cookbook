@@ -4,6 +4,7 @@ if node['platform'] == 'ubuntu'
 
   package 'node-hipache' do
     action :upgrade
+    options '-o Dpkg::Options::="--force-confold"'
   end
 
   service 'hipache' do
