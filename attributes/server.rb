@@ -5,7 +5,7 @@ default['tsuru']['server']['admin_listen_port'] = '8081'
 default['tsuru']['server']['use-tls'] = false
 default['tsuru']['server']['tls-cert-file'] = nil # path to cert
 default['tsuru']['server']['tls-key-file'] = nil # path to key
-default['tsuru']['server']['host'] = "http#{'s' if node['tsuru']['server']['use-tls']}://#{node.name}:#{node['tsuru']['server']['listen_port']}"
+default['tsuru']['server']['host'] = "http#{'s' if node['tsuru']['server']['use-tls']}://#{node.fqdn}:#{node['tsuru']['server']['listen_port']}"
 default['tsuru']['server']['debug'] = false
 
 default['tsuru']['server']['database']['url'] = "127.0.0.1:#{node['mongodb']['config']['port'] || '27017' rescue '27017'}"
@@ -13,8 +13,8 @@ default['tsuru']['server']['database']['name'] = 'tsuru'
 
 default['tsuru']['server']['git']['unit-repo'] = '/home/application/current'
 default['tsuru']['server']['git']['api-server'] = "http://#{node['gandalf-server']['bind']}"
-default['tsuru']['server']['git']['rw-host'] = node.name
-default['tsuru']['server']['git']['ro-host'] = node.name
+default['tsuru']['server']['git']['rw-host'] = node.fqdn
+default['tsuru']['server']['git']['ro-host'] = node.fqdn
 
 default['tsuru']['server']['admin-team'] = 'admin'
 default['tsuru']['server']['auth']['scheme'] = 'native' #only other option is oauth
@@ -56,10 +56,10 @@ default['tsuru']['server']['docker']['ssh']['add-key-cmd'] = '/var/lib/tsuru/add
 default['tsuru']['server']['docker']['ssh']['public-key'] = '/home/ubuntu/.ssh/id_rsa.pub'
 default['tsuru']['server']['docker']['ssh']['user'] = 'ubuntu'
 default['tsuru']['server']['docker']['ssh']['sshd-path'] = '/usr/sbin/sshd'
-default['tsuru']['server']['docker']['registry'] = node.name
+default['tsuru']['server']['docker']['registry'] = node.fqdn
 default['tsuru']['server']['docker']['servers'] = [node['docker']['host'].find{|host| host.start_with?('tcp') }.gsub('tcp://','http://')] rescue ['http://localhost:2375']
 
-default['tsuru']['server']['hipache']['domain'] = node.name
+default['tsuru']['server']['hipache']['domain'] = node.fqdn
 
 default['tsuru']['server']['quota']['units-per-app'] = 'unlimited'
 default['tsuru']['server']['quota']['apps-per-user'] = 'unlimited'
