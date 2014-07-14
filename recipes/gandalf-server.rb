@@ -36,7 +36,7 @@ if node['platform'] == 'ubuntu'
   end
 
   template '/home/git/.bash_profile' do
-    action :create
+    action :create_if_missing
     owner 'root'
     group 'root'
     mode 0644
