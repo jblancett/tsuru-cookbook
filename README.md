@@ -37,6 +37,7 @@ Recipes
 
 * tsuru::redis - wrapper to install [redis] (https://github.com/Firma8/redis-cookbook)
 
+* tsuru::fullstack - full tsuru PaaS install: mongodb, redis, hipache, gandalf-server, docker-registry, and tsuru-server
 
 Attributes
 ----------
