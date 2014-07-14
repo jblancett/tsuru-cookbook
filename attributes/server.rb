@@ -12,7 +12,7 @@ default['tsuru']['server']['database']['url'] = "127.0.0.1:#{node['mongodb']['co
 default['tsuru']['server']['database']['name'] = 'tsuru'
 
 default['tsuru']['server']['git']['unit-repo'] = '/home/application/current'
-default['tsuru']['server']['git']['api-server'] = "http://#{node['gandalf-server']['bind']}"
+default['tsuru']['server']['git']['api-server'] = node['tsuru']['server']['host']
 default['tsuru']['server']['git']['rw-host'] = node.fqdn
 default['tsuru']['server']['git']['ro-host'] = node.fqdn
 
