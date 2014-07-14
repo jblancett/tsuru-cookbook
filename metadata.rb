@@ -4,7 +4,7 @@ maintainer_email 'josh@firma8.com'
 license          'All rights reserved'
 description      'Installs/Configures tsuru'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.4.1'
+version          '0.4.2'
 depends           'apt'
 depends           'mongodb'
 depends           'redis'
