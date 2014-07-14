@@ -8,7 +8,7 @@ default['tsuru']['server']['tls-key-file'] = nil # path to key
 default['tsuru']['server']['host'] = "http#{'s' if node['tsuru']['server']['use-tls']}://#{node.name}:#{node['tsuru']['server']['listen_port']}"
 default['tsuru']['server']['debug'] = false
 
-default['tsuru']['server']['database']['url'] = '127.0.0.1:27017'
+default['tsuru']['server']['database']['url'] = "127.0.0.1:#{node['mongodb']['config']['port'] || '27017'}"
 default['tsuru']['server']['database']['name'] = 'tsuru'
 
 default['tsuru']['server']['git']['unit-repo'] = '/home/application/current'
