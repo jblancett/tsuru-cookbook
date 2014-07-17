@@ -69,7 +69,7 @@ docker:
     public-key: <%=@tsuru_server['docker']['ssh']['public-key']%>
     user: <%=@tsuru_server['docker']['ssh']['user']%>
     sshd-path: <%=@tsuru_server['docker']['ssh']['sshd-path']%>
-  #registry: <%=@tsuru_server['docker']['registry']%> # no docs for this config
+  registry: <%=@tsuru_server['docker']['registry']%>
   servers:
 <% @tsuru_server['docker']['servers'].each do |server| %>
     - <%=server%>

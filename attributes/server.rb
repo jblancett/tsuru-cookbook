@@ -54,7 +54,7 @@ default['tsuru']['server']['docker']['ssh']['add-key-cmd'] = '/var/lib/tsuru/add
 default['tsuru']['server']['docker']['ssh']['public-key'] = '/home/ubuntu/.ssh/id_rsa.pub'
 default['tsuru']['server']['docker']['ssh']['user'] = 'ubuntu'
 default['tsuru']['server']['docker']['ssh']['sshd-path'] = '/usr/sbin/sshd'
-default['tsuru']['server']['docker']['registry'] = node.fqdn
+default['tsuru']['server']['docker']['registry'] = "#{node.fqdn}:8080"
 default['tsuru']['server']['docker']['servers'] = [node['docker']['host'].find{|host| host.start_with?('tcp') }.gsub('tcp://','http://')] rescue ['http://localhost:2375']
 
 default['tsuru']['server']['hipache']['domain'] = node.fqdn
