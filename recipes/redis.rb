@@ -10,4 +10,10 @@ end.run_action(:add)
 package 'redis-server' do
   action :upgrade
   options '-o Dpkg::Options::="--force-confold"'
+  notifies :restart, 'service[redis-server]'
+end
+
+service 'redis-server' do
+	action :nothing
+	provider Chef::Provider::Service::Init
 end
