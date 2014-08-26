@@ -1,15 +1,17 @@
-if node['platform'] == 'ubuntu'
+execute 'install hipache' do
+  action :run
+  user 'root'
+  command 'npm install hipache -g'
+end
 
-  include_recipe 'tsuru::repo'
+cookbook_file '/etc/init/hipache.conf' do
+  action :create
+  owner 'root'
+  mode 0644
+  source 'hipache.conf.init'
+end
 
-  package 'node-hipache' do
-    action :upgrade
-    options '-o Dpkg::Options::="--force-confold"'
-  end
-
-  service 'hipache' do
-    action [:enable, :start]
-    provider Chef::Provider::Service::Upstart if Chef::VersionConstraint.new('>= 13.10').include?(node['platform_version'])
-  end
-
+service 'hipache' do
+  action [:enable, :start]
+  provider Chef::Provider::Service::Upstart
 end
