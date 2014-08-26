@@ -12,12 +12,16 @@ execute "sed -i 's/^TSR_API_ENABLED=.*/TSR_API_ENABLED=yes/' /etc/default/tsuru-
   not_if 'grep ^TSR_API_ENABLED=yes /etc/default/tsuru-server'
 end
 
-template '/etc/tsuru/tsuru.conf' do
+require 'yaml'
+file '/etc/tsuru/tsuru/conf' do
   action :create
-  source 'tsuru.conf.erb'
   owner 'root'
   group 'root'
   mode 0644
-  variables tsuru_server: node['tsuru']['server']
+  content node['tsuru']['server'].to_yaml.split(/\n/).reject{ |l| l == '---' }.join("\n")
   notifies :restart, 'service[tsuru-server-api]'
+end
+
+service 'tsuru-server-api' do
+  action :nothing
 end
