@@ -1,3 +1,7 @@
+package 'nodejs' do
+  action :install
+end
+
 execute 'install hipache' do
   action :run
   user 'root'
