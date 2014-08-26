@@ -1,0 +1,1 @@
+default['docker-registry']['port'] = 5000

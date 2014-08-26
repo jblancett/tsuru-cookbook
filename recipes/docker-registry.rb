@@ -1,14 +1,19 @@
-if node['platform'] == 'ubuntu'
+include_recipe 'tsuru::repo'
 
-  include_recipe 'tsuru::repo'
+package 'docker-registry' do
+  action :upgrade
+end
 
-  package 'docker-registry' do
-    action :upgrade
-  end
+file '/etc/default/docker-registry' do
+  action :create
+  owner 'root'
+  group 'root'
+  mode 0644
+  content "DOCKER_REGISTRY_LISTEN=\":#{node['docker-registry']['port']}\"\n"
+  notifies :restart, 'service[docker-registry]'
+end
 
-  service 'docker-registry' do
-    action [:enable, :start]
-    provider Chef::Provider::Service::Upstart if Chef::VersionConstraint.new('>= 13.10').include?(node['platform_version'])
-  end
-
+service 'docker-registry' do
+  action [:enable, :start]
+  provider Chef::Provider::Service::Upstart if Chef::VersionConstraint.new('>= 13.10').include?(node['platform_version'])
 end
