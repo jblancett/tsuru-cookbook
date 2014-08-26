@@ -1,8 +1,8 @@
 [
-  'tsuru::mongodb',
+  'tsuru::docker',
   'tsuru::redis',
   'tsuru::hipache',
-  'tsuru::docker',
+  'tsuru::mongodb',
   'tsuru::docker-registry',
   'tsuru::gandalf-server',
   'tsuru::server'
