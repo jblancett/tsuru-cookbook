@@ -13,7 +13,7 @@ execute "sed -i 's/^TSR_API_ENABLED=.*/TSR_API_ENABLED=yes/' /etc/default/tsuru-
 end
 
 require 'yaml'
-file '/etc/tsuru/tsuru/conf' do
+file '/etc/tsuru/tsuru.conf' do
   action :create
   owner 'root'
   group 'root'
@@ -24,4 +24,5 @@ end
 
 service 'tsuru-server-api' do
   action :nothing
+  provider Chef::Provider::Service::Upstart
 end
