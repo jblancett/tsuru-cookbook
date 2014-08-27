@@ -15,6 +15,6 @@ package 'mongodb-org' do
 end
 
 service 'mongod' do
-	action :nothing
-	provider Chef::Provider::Service::Upstart
+  action :start
+  provider Chef::Provider::Service::Upstart
 end
