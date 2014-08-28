@@ -17,7 +17,7 @@ default['tsuru']['server']['database']['name'] = 'tsuru'
 
 ## Git configuration
 default['tsuru']['server']['git']['unit-repo'] = '/home/application/current'
-default['tsuru']['server']['git']['api-server'] = 'localhost'
+default['tsuru']['server']['git']['api-server'] = "http://#{node['fqdn']}:8000"
 default['tsuru']['server']['git']['rw-host'] = node['fqdn']
 default['tsuru']['server']['git']['ro-host'] = node['fqdn']
 
