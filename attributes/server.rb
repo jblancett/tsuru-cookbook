@@ -50,6 +50,7 @@ default['tsuru']['server']['redis-queue']['port'] = 6379
 
 ## Hipache
 default['tsuru']['server']['hipache']['domain'] = node['fqdn']
+default['tsuru']['server']['hipache']['redis-server'] = '127.0.0.1:6379'
 
 ## Docker provisioner
 default['tsuru']['server']['provisioner'] = 'docker'
