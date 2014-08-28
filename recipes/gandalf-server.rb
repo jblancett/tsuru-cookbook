@@ -39,7 +39,7 @@ template '/home/git/.bash_profile' do
   group 'root'
   mode 0644
   source 'bash_profile.erb'
-  variables tsuru_token: node['gandalf-server']['token'] || `which tsr &> /dev/null && tsr token`
+  variables tsuru_token: node['gandalf-server']['token'] || `test -e /usr/bin/tsr && tsr token`
 end
 
 ['gandalf-server','archive-server'].each do |svc|
