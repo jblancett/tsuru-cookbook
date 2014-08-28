@@ -18,7 +18,7 @@ file '/etc/tsuru/tsuru.conf' do
   owner 'root'
   group 'root'
   mode 0644
-  content node['tsuru']['server'].to_yaml.split(/\n/).reject{ |l| l == '---' }.join("\n")
+  content node['tsuru']['server'].to_hash.to_yaml
   notifies :restart, 'service[tsuru-server-api]'
 end
 
