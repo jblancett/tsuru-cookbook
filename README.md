@@ -1,6 +1,7 @@
 Tsuru Cookbook
 ==============
 Installs and configures tsuru PaaS
+Everything but docker is fully contained within this cookbook.  If you want more advanced configuration for mongodb or redis, use dedicated cookbooks for them.
 
 Requirements
 ------------
@@ -12,37 +13,28 @@ Requirements
 * [aufs] (https://github.com/bflad/chef-aufs)
 * [lxc] (https://github.com/hw-cookbooks/lxc)
 * [docker] (https://github.com/bflad/chef-docker)
-* [redis] (https://github.com/Firma8/redis-cookbook)
-* [mongodb] (https://github.com/edelight/chef-mongodb)
 
 Recipes
 -----
-* tsuru::default - Default recipe installs tsuru-server package without enabling any services
 
 * tsuru::repo - sets up tsuru apt ppa
 
-* tsuru::agent - Installs tsuru-server package and enables ssh-agent
-
-* tsuru::server - Installs tsuru-server package and enables all services
+* tsuru::server - Installs and configures tsuru-server from tsuru ppa
 
 * tsuru::docker - just a wrapper to install docker using [chef-docker](https://github.com/bflad/chef-docker)
 
 * tsuru::docker-registry - Installs docker-registry from tsuru ppa
 
 * tsuru::gandalf-server - Installs and configures both gandalf-server and archive-server from tsuru ppa
+This will need to run AFTER tsuru::server for token generation to work.
 
-* tsuru::hipache - Installs node-hipache from tsuru ppa
+* tsuru::hipache - Installs and configures hipache using npm
 
-* tsuru::mongodb - wrapper to install [mongodb] (https://github.com/edelight/chef-mongodb)
+* tsuru::mongodb - Installs mongodb
 
-* tsuru::redis - wrapper to install [redis] (https://github.com/Firma8/redis-cookbook)
+* tsuru::redis - Installs redis-server
 
-* tsuru::fullstack - full tsuru PaaS install: mongodb, redis, hipache, gandalf-server, docker-registry, and tsuru-server
-
-Attributes
-----------
-#### tsuru::default
-
+* tsuru::fullstack - full tsuru PaaS install: docker, redis, hipache, mongodb, docker-registry, tsuru-server, and gandalf-server
 
 Contributing
 ------------
@@ -53,4 +45,4 @@ Contributing
 
 Authors
 -------------------
-Authors: jblancett (josh@firma8.com)
+Authors: jblancett (joshblancett@gmail.com)
