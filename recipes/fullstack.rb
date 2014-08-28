@@ -4,8 +4,8 @@
   'tsuru::hipache',
   'tsuru::mongodb',
   'tsuru::docker-registry',
-  'tsuru::gandalf-server',
   'tsuru::server'
+  'tsuru::gandalf-server'
 ].each do |r|
   include_recipe r
 end
