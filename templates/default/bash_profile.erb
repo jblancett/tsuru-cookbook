@@ -1,4 +1,4 @@
 export TSURU_HOST=<%=node['tsuru']['server']['host']%>
 export TSURU_TOKEN=<%=@tsuru_token%>
-export ARCHIVE_SERVER_READ=http://<%=node['tsuru']['server']['host']%>:3232
+export ARCHIVE_SERVER_READ=http://<%=node['fqdn']%>:3232
 export ARCHIVE_SERVER_WRITE=http://127.0.0.1:3131
