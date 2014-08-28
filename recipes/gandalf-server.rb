@@ -7,12 +7,18 @@ include_recipe 'tsuru::repo'
   end.run_action(:upgrade)
 end
 
+directory '/home/git/bare-template' do
+  action :create
+  owner 'git'
+  group 'git'
+  mode 0755
+end
+
 directory '/home/git/bare-template/hooks' do
   action :create
   owner 'git'
   group 'git'
   mode 0755
-  recursive true
 end
 
 cookbook_file '/home/git/bare-template/hooks/pre-receive' do
@@ -35,8 +41,8 @@ end
 
 template '/home/git/.bash_profile' do
   action :create_if_missing
-  owner 'root'
-  group 'root'
+  owner 'git'
+  group 'git'
   mode 0644
   source 'bash_profile.erb'
   variables tsuru_token: node['gandalf-server']['token'] || `test -e /usr/bin/tsr && tsr token`
