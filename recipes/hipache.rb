@@ -2,10 +2,27 @@ package 'nodejs' do
   action :install
 end
 
+package 'npm' do
+  action :install
+end
+
 execute 'install hipache' do
   action :run
   user 'root'
   command 'npm install hipache -g'
+end
+
+link '/usr/bin/hipache' do
+  action :create
+  to '/usr/local/bin/hipache'
+  only_if 'test -e /usr/local/bin/hipache'
+  not_if 'test -e /usr/bin/hipache'
+end
+
+directory node['hipache']['server']['accessLog'].gsub(/\/[^\/]+$/,'') do
+  action :create
+  owner node['hipache']['user']
+  recursive true
 end
 
 cookbook_file '/etc/init/hipache.conf' do
@@ -13,6 +30,7 @@ cookbook_file '/etc/init/hipache.conf' do
   owner 'root'
   mode 0644
   source 'hipache.conf.init'
+  notifies :start, 'service[hipache]'
 end
 
 file '/etc/hipache.conf' do
@@ -24,6 +42,6 @@ file '/etc/hipache.conf' do
 end
 
 service 'hipache' do
-  action [:enable, :start]
+  action :nothing
   provider Chef::Provider::Service::Upstart
 end
