@@ -1,9 +1,10 @@
-package 'nodejs' do
+ package 'nodejs' do
   action :install
 end
 
 package 'npm' do
   action :install
+  not_if 'test -x /usr/bin/npm' # some distributions include npm with nodejs package
 end
 
 execute 'install hipache' do
