@@ -45,7 +45,7 @@ template '/home/git/.bash_profile' do
   group 'git'
   mode 0644
   source 'bash_profile.erb'
-  variables tsuru_token: node['gandalf-server']['token'] || `test -e /usr/bin/tsr && tsr token`
+  variables tsuru_token: node['gandalf-server']['token'] || Mixlib::ShellOut.new('test -e /usr/bin/tsr && tsr token').run_command.stdout
 end
 
 ['gandalf-server','archive-server'].each do |svc|
