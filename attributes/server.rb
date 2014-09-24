@@ -59,7 +59,6 @@ default['tsuru']['server']['docker']['repository-namespace'] = 'tsuru'
 default['tsuru']['server']['docker']['router'] = 'hipache'
 default['tsuru']['server']['docker']['deploy-cmd'] = '/var/lib/tsuru/deploy'
 default['tsuru']['server']['docker']['segregate'] = false
-default['tsuru']['server']['docker']['cluster']['storage'] = 'mongodb'
 default['tsuru']['server']['docker']['cluster']['mongo-url'] = '127.0.0.1:27017'
 default['tsuru']['server']['docker']['cluster']['mongo-database'] = 'cluster'
 default['tsuru']['server']['docker']['run-cmd']['bin'] = '/var/lib/tsuru/start'
@@ -68,6 +67,15 @@ default['tsuru']['server']['docker']['ssh']['add-key-cmd'] = '/var/lib/tsuru/add
 default['tsuru']['server']['docker']['ssh']['user'] = 'ubuntu'
 # default['tsuru']['server']['docker']['registry'] = "#{node.fqdn}:5000"
 default['tsuru']['server']['docker']['servers'] = ['http://localhost:2375']
+
+#default['tsuru']['server']['docker']['healing']['heal-nodes'] = false
+#default['tsuru']['server']['docker']['healing']['active-monitoring-interval'] = 0
+#default['tsuru']['server']['docker']['healing']['disabled-time'] = 30
+#default['tsuru']['server']['docker']['healing']['max-failures'] = 5
+#default['tsuru']['server']['docker']['healing']['wait-new-time'] = 300
+#default['tsuru']['server']['docker']['healing']['heal-containers-timeout'] = 0
+#default['tsuru']['server']['docker']['healing']['events_collection'] = 'healing_events'
+#default['tsuru']['server']['docker']['healthcheck']['max-time'] = 120
 
 ## IaaS configuration
 # default['tsuru']['server']['iaas']['default'] = nil
