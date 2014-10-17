@@ -5,6 +5,8 @@ default['tsuru']['server']['listen'] = '0.0.0.0:8080'
 default['tsuru']['server']['host'] = "http#{'s' if node['tsuru']['server']['use-tls']}://#{node['fqdn']}:#{node['tsuru']['server']['listen'][/\d+$/]}"
 default['tsuru']['server']['admin-team'] = 'admin'
 # default['tsuru']['server']['debug'] = false
+## when log:file is unset, tsuru logs to syslog
+#default['tsuru']['server']['log']['file'] = '/var/log/tsuru.log'
 
 ## Database acess
 default['tsuru']['server']['database']['url'] = '127.0.0.1:27017'

@@ -6,6 +6,21 @@ package 'tsuru-server' do
   options '-o Dpkg::Options::="--force-confold"'
 end
 
+if node['tsuru']['server']['log'] && node['tsuru']['server']['log']['file']
+  directory File.dirname(node['tsuru']['server']['log']['file']) do
+    action :create
+    recursive true
+  end
+
+  file node['tsuru']['server']['log']['file']  do
+    action :create
+    owner 'tsuru'
+    group 'tsuru'
+    mode 0644
+    only_if 
+  end
+end
+
 execute "sed -i 's/^TSR_API_ENABLED=.*/TSR_API_ENABLED=yes/' /etc/default/tsuru-server" do
   action :run
   notifies :start, 'service[tsuru-server-api]'
@@ -13,12 +28,14 @@ execute "sed -i 's/^TSR_API_ENABLED=.*/TSR_API_ENABLED=yes/' /etc/default/tsuru-
 end
 
 require 'yaml'
+config = node['tsuru']['server'].to_hash
+config['docker'].delete('servers') if config['docker']['segregate']
 file '/etc/tsuru/tsuru.conf' do
   action :create
   owner 'root'
   group 'root'
   mode 0644
-  content node['tsuru']['server'].to_hash.to_yaml
+  content config.to_yaml
   notifies :restart, 'service[tsuru-server-api]'
 end
 
