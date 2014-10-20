@@ -17,7 +17,15 @@ if node['tsuru']['server']['log'] && node['tsuru']['server']['log']['file']
     owner 'tsuru'
     group 'tsuru'
     mode 0644
-    only_if 
+  end
+
+  template '/etc/logrotate.d/tsuru' do
+    action :create
+    owner 'root'
+    group 'root'
+    mode 0644
+    source 'tsuru.logrotate.erb'
+    variables :path => node['tsuru']['server']['log']['file']
   end
 end
 
