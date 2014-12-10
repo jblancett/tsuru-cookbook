@@ -4,6 +4,14 @@ package 'docker-registry' do
   action :upgrade
 end
 
+directory '/var/run/registry' do
+  action :create
+  mode 0755
+  owner 'registry'
+  group 'registry'
+  notifies :restart, 'service[docker-registry]'
+end
+
 file '/etc/default/docker-registry' do
   action :create
   owner 'root'
