@@ -2,7 +2,8 @@ default['tsuru']['server']['listen'] = '0.0.0.0:8080'
 # default['tsuru']['server']['use-tls'] = false
 # default['tsuru']['server']['tls-cert-file'] = nil # path to cert
 # default['tsuru']['server']['tls-key-file'] = nil # path to key
-default['tsuru']['server']['host'] = "http#{'s' if node['tsuru']['server']['use-tls']}://#{node['fqdn']}:#{node['tsuru']['server']['listen'][/\d+$/]}"
+default['tsuru']['server']['cname'] = node['fqdn']
+default['tsuru']['server']['host'] = "http#{'s' if node['tsuru']['server']['use-tls']}://#{node['tsuru']['server']['cname']}:#{node['tsuru']['server']['listen'][/\d+$/]}"
 default['tsuru']['server']['admin-team'] = 'admin'
 # default['tsuru']['server']['debug'] = false
 ## when log:file is unset, tsuru logs to syslog
@@ -19,9 +20,9 @@ default['tsuru']['server']['database']['name'] = 'tsuru'
 
 ## Git configuration
 default['tsuru']['server']['git']['unit-repo'] = '/home/application/current'
-default['tsuru']['server']['git']['api-server'] = "http://#{node['fqdn']}:8000"
-default['tsuru']['server']['git']['rw-host'] = node['fqdn']
-default['tsuru']['server']['git']['ro-host'] = node['fqdn']
+default['tsuru']['server']['git']['api-server'] = "http://#{node['gandalf-server']['host']}:8000"
+#default['tsuru']['server']['git']['rw-host'] = node['fqdn']
+#default['tsuru']['server']['git']['ro-host'] = node['fqdn']
 
 ## Authentication configuration
 default['tsuru']['server']['auth']['scheme'] = 'native' #only other option is oauth
@@ -51,7 +52,7 @@ default['tsuru']['server']['redis-queue']['port'] = 6379
 # default['tsuru']['server']['quota']['apps-per-user'] = 'unlimited'
 
 ## Hipache
-default['tsuru']['server']['hipache']['domain'] = node['fqdn']
+default['tsuru']['server']['hipache']['domain'] = node['tsuru']['server']['cname']
 default['tsuru']['server']['hipache']['redis-server'] = '127.0.0.1:6379'
 
 ## Docker provisioner
