@@ -68,7 +68,7 @@ default['tsuru']['server']['docker']['run-cmd']['port'] = '8888'
 default['tsuru']['server']['docker']['ssh']['add-key-cmd'] = '/var/lib/tsuru/add-key'
 default['tsuru']['server']['docker']['ssh']['user'] = 'ubuntu'
 # default['tsuru']['server']['docker']['registry'] = "#{node.fqdn}:5000"
-default['tsuru']['server']['docker']['servers'] = ['http://localhost:2375']
+# default['tsuru']['server']['docker']['servers'] = ['http://localhost:2375']
 
 #default['tsuru']['server']['docker']['healing']['heal-nodes'] = false
 #default['tsuru']['server']['docker']['healing']['active-monitoring-interval'] = 0
